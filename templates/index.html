@@ -111,7 +111,7 @@
             <!--/.Page heading-->
             <hr>
 
-            <div id="content"></div>
+            <div id="maincontent"></div>
 
             <!--Pagination-->
             <nav class="row flex-center wow fadeIn" data-wow-delay="0.2s">
@@ -248,21 +248,64 @@
     <!-- SCRIPTS -->
 
     <!-- JQuery -->
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
 
     <!-- Bootstrap dropdown -->
-    <script type="text/javascript" src="js/popper.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
 
     <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 
     <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="js/mdb.min.js"></script>
-
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js') }}"></script>
 
     <script>
     new WOW().init();
+    data = {{ data }};
+
+    var div;
+    var col;
+    console.log(data);
+    for (i = 0; i < 4; i++) {
+        div = document.createElement('div');
+
+        div.className = 'row';
+
+        col = "";
+        while (i % 3 !== 0 || i < data.length ) {
+        col = col +'                <!--First column-->'+
+        '                <div class="col-lg-4 wow fadeIn" data-wow-delay="0.2s">'+
+        ''+
+        '                    <!--Card-->'+
+        '                    <div class="card">'+
+        ''+
+        '                        <!--Card image-->'+
+        '                        <img class="img-fluid" src="http://image.tmdb.org/t/p/w300/' + data[i].poster_path +'" alt="Card image cap">'+
+        ''+
+        '                        <!--Card content-->'+
+        '                        <div class="card-body">'+
+        '                            <!--Title-->'+
+        '                            <h4 class="card-title">'+data[i].name+'</h4>'+
+        '                            <!--Text-->'+
+        '                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>'+
+        '                            <a href="#" class="btn btn-primary">Button</a>'+
+        '                        </div>'+
+        ''+
+        '                    </div>'+
+        '                    <!--/.Card-->'+
+        ''+
+        '                </div>'+
+        '                <!--/.First column-->'
+        i++;
+        }
+    div.innerHTML =  '<!--First row-->'+
+    '            <div class="row mt-5 wow">'+
+    col +
+    '            </div>'+
+    '            <!--/.First row-->';
+
+    document.getElementById('maincontent').appendChild(div);
+    }
     </script>
 
 </body>
