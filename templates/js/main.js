@@ -18,10 +18,9 @@ function show_results(response) {
 
     div.className = 'row';
 
-    div.innerHTML =  '<!--First row-->'+
-'            <div class="row mt-5 wow">'+
+var col = ""
     while (i % 3 !== 0 || i < response.length ) {
-'                <!--First column-->'+
+var col = col +'                <!--First column-->'+
 '                <div class="col-lg-4 wow fadeIn" data-wow-delay="0.2s">'+
 ''+
 '                    <!--Card-->'+
@@ -33,7 +32,7 @@ function show_results(response) {
 '                        <!--Card content-->'+
 '                        <div class="card-body">'+
 '                            <!--Title-->'+
-'                            <h4 class="card-title">Card title</h4>'+
+'                            <h4 class="card-title">'+response[i].name+'</h4>'+
 '                            <!--Text-->'+
 '                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>'+
 '                            <a href="#" class="btn btn-primary">Button</a>'+
@@ -43,11 +42,15 @@ function show_results(response) {
 '                    <!--/.Card-->'+
 ''+
 '                </div>'+
-'                <!--/.First column-->'+
+'                <!--/.First column-->'
+i++;
 }
+div.innerHTML =  '<!--First row-->'+
+'            <div class="row mt-5 wow">'+
+col +
 '            </div>'+
 '            <!--/.First row-->';
 
-    document.getElementById('content').appendChild(div)
+    document.getElementById('content').appendChild(div);
 }
 }
